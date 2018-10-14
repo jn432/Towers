@@ -29,6 +29,7 @@ class Disk {
         else if (newRod.isEmpty()) {
             rod.remove(this);
             newRod.add(this);
+            rod = newRod;
             System.out.println("Disk " + diskNum + " moves to Rod " + newRod.getRodNum());
         }
         else if ((this.diskNum > newRod.get(newRod.size()-1).diskNum) ) {
@@ -37,6 +38,7 @@ class Disk {
         else {
             rod.remove(this);
             newRod.add(this);
+            rod = newRod;
             System.out.println("Disk " + diskNum + " moves to Rod " + newRod.getRodNum());
         }
     }
@@ -59,24 +61,24 @@ class Rod extends ArrayList<Disk> {
 public class Towers {
     
     private static boolean hanoiAlgorithm(ArrayList<Disk> disks, Rod[] rods) {
-        if (disks.size() == 1) {
-            Disk d = disks.get(0);
-            d.move(rods[((d.getRodNum() + 1) % 3)]);
+        if (disks.isEmpty()) {
             return true;
         }
         else {
             ArrayList<Disk> disksRecursion = new ArrayList<>();
             disksRecursion.addAll(disks);
             disksRecursion.remove(0);
+            //System.out.println("disks total after removing: " + disksRecursion.size());
             hanoiAlgorithm(disksRecursion, rods);
             
-            Disk d = disks.get(disks.size()-1);
+            Disk d = disks.get(0);
             if ((d.getDiskNum() % 2) == 1) {
                 d.move(rods[((d.getRodNum() + 1) % 3)]);
             }
             else {
                 d.move(rods[((d.getRodNum() + 2) % 3)]);
             }
+            hanoiAlgorithm(disksRecursion, rods);
             return false;
         }
     }
@@ -110,6 +112,7 @@ public class Towers {
             disks.add(d);
         }
         hanoiAlgorithm(disks, rods);
+        System.out.println("End of algorithm");
     }
     
 }
