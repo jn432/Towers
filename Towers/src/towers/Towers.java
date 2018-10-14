@@ -103,6 +103,7 @@ public class Towers {
         //create 3 rods
         Rod[] rods = {new Rod(0), new Rod(1), new Rod(2)};
         
+        //ask for the number of disks
         int diskTotal = 0;
         while (diskTotal == 0) {
             try {
@@ -119,6 +120,7 @@ public class Towers {
             }
         }
         
+        //create the list and add it onto the first rod, and the arraylist of disks
         ArrayList<Disk> disks = new ArrayList<>();
         for (int i = diskTotal; i >= 1; i--) {
             Disk d = new Disk(i, rods[0]);
