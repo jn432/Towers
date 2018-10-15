@@ -127,6 +127,8 @@ public class Towers {
             rods[0].add(d);
             disks.add(d);
         }
+        
+        //run the algorithm
         hanoiAlgorithm(disks, rods);
         System.out.println("End of algorithm");
     }
